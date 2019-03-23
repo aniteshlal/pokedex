@@ -1,0 +1,122 @@
+h1 {
+    color: blue;
+}
+
+.top-border{
+    border: 10px solid red; 
+   
+    background-color: rgb(126, 10, 150);
+    /* text-align: center; */
+    font-size: 3em;
+    padding-bottom: 0em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+.sidenav {
+    
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 0px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  #main {
+    /* border: 10px solid red;  */
+    transition: margin-left .5s;
+    padding: 0em;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  
+.hamburger{
+    display: inline-block;
+    font-size:1em;
+    cursor:pointer;
+    text-align: left;
+}
+
+.pokemon-list-container {
+    position: relative;
+    text-align: center;
+}
+#pokemon-list>li {
+    /* border: 10px solid red; */
+    margin: 10px;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    display: inline-flex;
+    list-style-type: none;
+    cursor: pointer;
+    z-index: 20000;
+    border-radius: 5px;
+}
+.background:hover{
+  opacity: 0.5;
+}
+.pokemon-button-image{
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 150px;
+    height: 150px;
+}
+.monster-name{
+  position: absolute;
+  bottom: 0;
+    color: #fff;
+    font-size: 14px;
+    background-color: rgba(0,0,0,.5);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    text-align: center;
+    pointer-events: none;
+}
+.name-link{
+    position: absolute;
+    bottom: 0;
+    color: #fff;    
+    font-size: 14px;
+    background-color: rgba(0,0,0,.5);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    text-align: center;
+    pointer-events: click;
+}
+#pokemon-list>li {
+  box-shadow: 1px 1px 3px rgba(0,0,0,.12), 1px 1px 2px rgba(0,0,0,.24);
+}
