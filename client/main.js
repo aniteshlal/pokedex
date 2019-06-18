@@ -28,6 +28,16 @@ function getPokemonStats(pokemonID) {
     var modelHeader = document.getElementsByClassName("modal-header")[0];
     var pokemonName = modelHeader.getElementsByTagName("h2")[0];
     pokemonName.innerHTML = data[pokemonID-1].name;
+    var statdetail = document.getElementsByClassName("stats-bar-bg");
+    var typename = data[pokemonID-1].types[0].type.name
+    // console.log(typename);
+    for(var i = 0; i < statdetail.length; i++){
+      var color = typeColorMap.find(function(elem){
+        return typename === elem.name;
+      }).color;
+      // console.log(color)
+      statdetail[i].setAttribute("style", "background: " + color)
+    }
   }
   
   // When the user clicks on <span> (x), close the modal
@@ -95,6 +105,7 @@ var typeColorMap = [
 ];
 
 request.open("GET", "http://localhost:3000/", true);
+
 
 function findBackgroundColor(types) {
   if (types.length == 1) {
