@@ -1,153 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Pokedex</title>
-    <link href="css/styles1.css" rel="stylesheet" />
-  </head>
 
-  <body>
-    <div>
-      <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-          >&times;</a
-        >
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-      </div>
+<head>
+  <title>Pokedex</title>
+  <link href="css/styles1.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
     </div>
+  </div>
 
-    <div id="main">
-      <div>
-        <div id="myModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-            <div class="modal-header">
-              <span class="close">&times;</span>
-              <h2>Bulbasaur</h2>
-            </div>
-            <div class="modal-body">
-              <div class="detail-header">
-                <div class="pokemon-sprite sprite-1 pokemon-sprite-detail">
-                  <div class="pokemon-sprite-detail"></div>
-                </div>
-                <div class="detail-box">
-                  <div class="types-and-id">
-                    <div class="detail-types">
-                      <span
-                        class="pokemon-type"
-                        style="
+  <div id="main">
+    <div>
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Bulbasaur</h2>
+          </div>
+          <div class="modal-body">
+            <div class="detail-header">
+              <div class="pokemon-sprite sprite-1 pokemon-sprite-detail">
+                <div class="pokemon-sprite-detail"></div>
+              </div>
+              <div class="detail-box">
+                <div class="types-and-id">
+                  <div class="detail-types">
+                    <span class="pokemon-type" style="
                             border: 1px solid rgb(186, 227, 166);
                             background: rgb(105, 194, 61);
-                        "
-                      >
-                        Grass
-                      </span>
-                      <span
-                        class="pokemon-type"
-                        style="
+                        ">
+                      Grass
+                    </span>
+                    <span class="pokemon-type" style="
                             border: 1px solid rgb(200, 116, 200);
                             background: rgb(146, 58, 146);
-                        "
-                      >
-                        Poison
-                      </span>
-                    </div>
-                    <div class="detail-id">
-                      <span>#1</span>
-                    </div>
-                  </div>
-                  <div class="stats-detail">
-                    <div class="stats-detail-row">
-                      <span>HP</span>
-                      <span class="stat-bar">
-                        <div class="stats-bar-bg" style="background: rgb(105, 194, 61); transform: scaleX(0.3217993079584775)"></div>
-                        <div style="color: #fff" class="stats-bar-fg">45</div>
+                        ">
+                      Poison
                     </span>
-                    </div>
-                    <div class="stats-detail-row">
-                      <span>Attack</span>
-                      <span class="stat-bar">
-                        <div class="stats-bar-bg">
-                          45
-                        </div>
-                      </span>
-                    </div>
-                    <div class="stats-detail-row">
-                      <span>Defense</span>
-                      <span class="stat-bar">
-                        <div class="stats-bar-bg">
-                          49
-                        </div>
-                      </span>
-                    </div>
-                    <div class="stats-detail-row">
-                      <span>Speed</span>
-                      <span class="stat-bar">
-                        <div class="stats-bar-bg">
-                          45
-                        </div>
-                      </span>
-                    </div>
-                    <div class="stats-detail-row">
-                      <span>Special Atk</span>
-                      <span class="stat-bar">
-                        <div class="stats-bar-bg">
-                          65
-                        </div>
-                      </span>
-                    </div>
-                    <div class="stats-detail-row">
-                      <span>Special Def</span>
-                      <span class="stat-bar">
-                        <div class="stats-bar-bg">
-                          45
-                        </div>
-                      </span>
-                    </div>
+                  </div>
+                  <div class="detail-id">
+                    <span>#1</span>
+                  </div>
+                </div>
+                <div class="stats-detail">
+                  <div class="hp stats-detail-row">
+                    <span>HP</span>
+                    <span class="stat-bar">
+                      <div class="stats-bar-bg"
+                        style="background: rgb(105, 194, 61); transform: scaleX(0.3217993079584775)"></div>
+                      <div style="color: #fff" class="stats-bar-fg">45</div>
+                    </span>
+                  </div>
+                  <div class="attack stats-detail-row">
+                    <span>Attack</span>
+                    <span class="stat-bar">
+                      <div class="stats-bar-bg"></div>
+                      <div style="color: #fff" class="stats-bar-fg">4</div>
+                    </span>
+                  </div>
+                  <div class="defense stats-detail-row">
+                    <span>Defense</span>
+                    <span class="stat-bar">
+                      <div class="stats-bar-bg"></div>
+                      <div style="color: #fff" class="stats-bar-fg">5</div>
+                    </span>
+                  </div>
+                  <div class="speed stats-detail-row">
+                    <span>Speed</span>
+                    <span class="stat-bar">
+                      <div class="stats-bar-bg"></div>
+                      <div style="color: #fff" class="stats-bar-fg">452</div>
+                    </span>
+                  </div>
+                  <div class="special-attack stats-detail-row">
+                    <span>Special Atk</span>
+                    <span class="stat-bar">
+                      <div class="stats-bar-bg"></div>
+                      <div style="color: #fff" class="stats-bar-fg">435</div>
+                    </span>
+                  </div>
+                  <div class="special-defense stats-detail-row">
+                    <span>Special Def</span>
+                    <span class="stat-bar">
+                      <div class="stats-bar-bg"></div>
+                      <div style="color: #fff" class="stats-bar-fg">45</div>
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="detail-below-header">
-                <div>
-                  <p>Some text in the Modal Body detail below header div</p>
-                  <p>Some other text...</p>
-                </div>
+            </div>
+            <div class="detail-below-header">
+              <div>
+                <p>Some text in the Modal Body detail below header div</p>
+                <p>Some other text...</p>
               </div>
             </div>
-            <div class="modal-footer">
-              <h3>Modal Footer</h3>
-            </div>
           </div>
-        </div>
-
-        <div>
-          <div id="hellobar">
-            <p class="top-border">
-              <span class="hamburger" onclick="openNav()">&#9776;</span> Gen 1
-              Pokemon
-            </p>
-          </div>
-          <div id="pokemon-list-wrapper">
-            <ul id="pokemon-list">
-              <li
-                class="pokemon-container"
-                style="background: linear-gradient(90deg, #78C850 50%, #A040A0 50%);"
-              >
-                <button
-                  id="myBtn"
-                  type="button"
-                  class="pokemon-sprite sprite-1"
-                ></button>
-                <span class="pokemon-name">Bulbasaur</span>
-              </li>
-            </ul>
+          <div class="modal-footer">
+            <h3>Modal Footer</h3>
           </div>
         </div>
       </div>
-    </div>
 
-    <script src="main.js"></script>
-  </body>
+      <div>
+        <div id="hellobar">
+          <p class="top-border">
+            <span class="hamburger" onclick="openNav()">&#9776;</span> Gen 1
+            Pokemon
+          </p>
+        </div>
+        <div id="pokemon-list-wrapper">
+          <ul id="pokemon-list">
+            <li class="pokemon-container" style="background: linear-gradient(90deg, #78C850 50%, #A040A0 50%);">
+              <button id="myBtn" type="button" class="pokemon-sprite sprite-1"></button>
+              <span class="pokemon-name">Bulbasaur</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
 </html>

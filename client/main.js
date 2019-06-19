@@ -10,43 +10,103 @@ function closeNav() {
 
 var data;
 
+function update_stats(pokemonID) {
+  var stats_detail = modal.getElementsByClassName("stats-detail")[0];
+  var pokemonData = data[pokemonID - 1];
+  var pokemonStats = pokemonData.stats;
+  var stat_bar_fig
+  var typename = data[pokemonID - 1].types[0].type.name
+  var color = typeColorMap.find(function (elem) {
+    return typename === elem.name;
+  }).color;
+  for (var i = 0; i < pokemonStats.length; i++) {
+    var statname = pokemonStats[i].stat.name
+    var statvalue = pokemonStats[i].base_stat
+    var ratio = statvalue/246
+    switch (statname) {
+      case 'speed':
+        stat_bar_fig = stats_detail.getElementsByClassName('speed')[0].getElementsByTagName('div')[1]
+        stat_bar_fig.innerHTML = statvalue
+        stat_bar_fig = stats_detail.getElementsByClassName('speed')[0].getElementsByTagName('div')[0]
+        stat_bar_fig.style.transform = "scaleX("+ratio+")"
+        break;
+      case 'special-defense':
+        stat_bar_fig = stats_detail.getElementsByClassName('special-defense')[0].getElementsByTagName('div')[1]
+        stat_bar_fig.innerHTML = statvalue
+        stat_bar_fig = stats_detail.getElementsByClassName('special-defense')[0].getElementsByTagName('div')[0]
+        stat_bar_fig.style.transform = "scaleX("+ratio+")"
+        break;
+      case 'special-attack':
+        stat_bar_fig = stats_detail.getElementsByClassName('special-attack')[0].getElementsByTagName('div')[1]
+        stat_bar_fig.innerHTML = statvalue
+        stat_bar_fig = stats_detail.getElementsByClassName('special-attack')[0].getElementsByTagName('div')[0]
+        stat_bar_fig.style.transform = "scaleX("+ratio+")"
+        break;
+      case 'defense':
+        stat_bar_fig = stats_detail.getElementsByClassName('defense')[0].getElementsByTagName('div')[1]
+        stat_bar_fig.innerHTML = statvalue
+        stat_bar_fig = stats_detail.getElementsByClassName('defense')[0].getElementsByTagName('div')[0]
+        stat_bar_fig.style.transform = "scaleX("+ratio+")"
+        break;
+      case 'attack':
+        stat_bar_fig = stats_detail.getElementsByClassName('attack')[0].getElementsByTagName('div')[1]
+        stat_bar_fig.innerHTML = statvalue
+        stat_bar_fig = stats_detail.getElementsByClassName('attack')[0].getElementsByTagName('div')[0]
+        stat_bar_fig.style.transform = "scaleX("+ratio+")"
+        break;
+      case 'hp':
+          stat_bar_fig = stats_detail.getElementsByClassName('hp')[0].getElementsByTagName('div')[1]
+          stat_bar_fig.innerHTML = statvalue
+          stat_bar_fig = stats_detail.getElementsByClassName('hp')[0].getElementsByTagName('div')[0]
+          stat_bar_fig.style.transform = "scaleX("+ratio+")"
+          break;
+      default:
+        //do nothing
+        break;
+    }
+  }
+}
+
 function getPokemonStats(pokemonID) {
   var modal = document.getElementById('myModal');
 
   // Get the button that opens the modal
   var btn = document.getElementById("sprite-" + pokemonID);
-  
+
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
 
 
-  console.log("name of pokemon - " + data[pokemonID-1].name);
+  console.log("name of pokemon - " + data[pokemonID - 1].name);
   // When the user clicks the button, open the modal 
-  btn.onclick = function() {
+  btn.onclick = function () {
     modal.style.display = "block";
     console.log("clicking pokemon id = " + pokemonID);
     var modelHeader = document.getElementsByClassName("modal-header")[0];
     var pokemonName = modelHeader.getElementsByTagName("h2")[0];
-    pokemonName.innerHTML = data[pokemonID-1].name;
-    var statdetail = document.getElementsByClassName("stats-bar-bg");
-    var typename = data[pokemonID-1].types[0].type.name
-    // console.log(typename);
-    for(var i = 0; i < statdetail.length; i++){
-      var color = typeColorMap.find(function(elem){
+    pokemonName.innerHTML = data[pokemonID - 1].name;
+    var stats_detail = modal.getElementsByClassName("stats-detail");
+    var stats_bar_bg = document.getElementsByClassName("stats-bar-bg");
+    var typename = data[pokemonID - 1].types[0].type.name
+    
+    for (var i = 0; i < stats_bar_bg.length; i++) {
+      var color = typeColorMap.find(function (elem) {
         return typename === elem.name;
       }).color;
-      // console.log(color)
-      statdetail[i].setAttribute("style", "background: " + color)
+      stats_bar_bg[i].setAttribute("style", "background: " + color)
     }
+
+    update_stats(pokemonID);
+
   }
-  
+
   // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
+  span.onclick = function () {
     modal.style.display = "none";
   }
-  
+
   // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
@@ -62,17 +122,17 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
+btn.onclick = function () {
   modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
   modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
@@ -84,24 +144,24 @@ var request = new XMLHttpRequest();
 // Open a new connection, using the GET request on the URL endpoint
 // var data = [];
 var typeColorMap = [
-  { name: "normal",   color: "#A8A878", rgbColor: "rgb(168, 168, 120)" },
+  { name: "normal", color: "#A8A878", rgbColor: "rgb(168, 168, 120)" },
   { name: "fighting", color: "#C03028", rgbColor: "rgb(192, 48, 40)" },
-  { name: "flying",   color: "#A890F0", rgbColor: "rgb(168, 144, 240)" },
-  { name: "poison",   color: "#A040A0", rgbColor: "rgb(160, 64, 160)" },
-  { name: "ground",   color: "#E0C068", rgbColor: "rgb(224, 192, 104)" },
-  { name: "rock",     color: "#B8A038", rgbColor: "rgb(184, 160, 56)" },
-  { name: "bug",      color: "#A8B820", rgbColor: "rgb(168, 184, 32)" },
-  { name: "ghost",    color: "#705898", rgbColor: "rgb(112, 88, 152)" },
-  { name: "steel",    color: "#B8B8D0", rgbColor: "rgb(184, 184, 208)" },
-  { name: "fire",     color: "#F08030", rgbColor: "rgb(240, 128, 48)" },
-  { name: "water",    color: "#6890F0", rgbColor: "rgb(104, 144, 240)" },
-  { name: "grass",    color: "#78C850", rgbColor: "rgb(120, 200, 80)" },
+  { name: "flying", color: "#A890F0", rgbColor: "rgb(168, 144, 240)" },
+  { name: "poison", color: "#A040A0", rgbColor: "rgb(160, 64, 160)" },
+  { name: "ground", color: "#E0C068", rgbColor: "rgb(224, 192, 104)" },
+  { name: "rock", color: "#B8A038", rgbColor: "rgb(184, 160, 56)" },
+  { name: "bug", color: "#A8B820", rgbColor: "rgb(168, 184, 32)" },
+  { name: "ghost", color: "#705898", rgbColor: "rgb(112, 88, 152)" },
+  { name: "steel", color: "#B8B8D0", rgbColor: "rgb(184, 184, 208)" },
+  { name: "fire", color: "#F08030", rgbColor: "rgb(240, 128, 48)" },
+  { name: "water", color: "#6890F0", rgbColor: "rgb(104, 144, 240)" },
+  { name: "grass", color: "#78C850", rgbColor: "rgb(120, 200, 80)" },
   { name: "electric", color: "#F8D030", rgbColor: "rgb(248, 208, 48)" },
-  { name: "psychic",  color: "#F85888", rgbColor: "rgb(248, 88, 136)" },
-  { name: "ice",      color: "#98D8D8", rgbColor: "rgb(152, 216, 216)" },
-  { name: "dragon",   color: "#7038F8", rgbColor: "rgb(112, 56, 248)" },
-  { name: "dark",     color: "#705848", rgbColor: "rgb(112, 88, 72)" },
-  { name: "fairy",    color: "#EE99AC", rgbColor: "rgb(238, 153, 172)" }
+  { name: "psychic", color: "#F85888", rgbColor: "rgb(248, 88, 136)" },
+  { name: "ice", color: "#98D8D8", rgbColor: "rgb(152, 216, 216)" },
+  { name: "dragon", color: "#7038F8", rgbColor: "rgb(112, 56, 248)" },
+  { name: "dark", color: "#705848", rgbColor: "rgb(112, 88, 72)" },
+  { name: "fairy", color: "#EE99AC", rgbColor: "rgb(238, 153, 172)" }
 ];
 
 request.open("GET", "http://localhost:3000/", true);
@@ -126,7 +186,7 @@ function findBackgroundColor(types) {
   return backgroundColor;
 }
 
-request.onload = function() {
+request.onload = function () {
   // Begin accessing JSON data here
   data = JSON.parse(request.response);
   //console.log(request.response);
@@ -142,10 +202,10 @@ request.onload = function() {
       imageButton.setAttribute("type", "button");
       imageButton.setAttribute("alt", "pokemon-image");
       imageButton.setAttribute("class", "pokemon-sprite sprite-" + pokemon.id);
-      imageButton.setAttribute("id","sprite-" + pokemon.id);
+      imageButton.setAttribute("id", "sprite-" + pokemon.id);
 
       // imageButton.addEventListener("click", "getPokemonStats("+pokemon.id+")");
-      imageButton.setAttribute("onclick", "getPokemonStats("+pokemon.id+")");
+      imageButton.setAttribute("onclick", "getPokemonStats(" + pokemon.id + ")");
       imageButton.style.backgroundImage =
         "url(" + pokemon.sprites.front_default + ")";
       const span = document.createElement("span");
