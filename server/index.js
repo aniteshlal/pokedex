@@ -56,7 +56,7 @@ function makeRequestsFromArray(arr) {
 
 app.get("/", async function(req, res) {
   try {
-    await makeRequestsFromArray(createArrayRange(1, 10));
+    await makeRequestsFromArray(createArrayRange(1, 37));
     // console.log("data length: " + data.length);
     res.send(data);
   } catch (e) {

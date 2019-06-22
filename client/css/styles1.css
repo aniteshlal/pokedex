@@ -129,9 +129,7 @@ body, button, html, input, textarea {
 /* .pokemon-sprite-detail{
   transform: scale(1.5);
 } */
-.pokemon-sprite-detail:hover{
-  background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png");
-}
+
 #pokemon-list li span {
   color: #fff;
   font-size: 14px;
@@ -143,10 +141,6 @@ body, button, html, input, textarea {
   pointer-events: none;
   position: absolute;
   bottom: 0;
-}
-
-.sprite-1{
-  background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png);
 }
 
 .detail-box{
@@ -167,7 +161,10 @@ body, button, html, input, textarea {
   display: flex;
 }
 .stats-detail{
+  min-width: 200px;
+  max-width: 300px;
   margin-top: 10px;
+  font-size: 17px;
 }
 .stats-detail-row span:nth-child(odd){
   /* -ms-flex-preferred-size: 0; */
@@ -247,7 +244,7 @@ body, button, html, input, textarea {
   background-color: #fefefe;
   margin: auto;
   padding: 0;
-  border: 1px solid #888;
+  border: 2px solid #111;
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
@@ -298,4 +295,6 @@ body, button, html, input, textarea {
   padding: 16px;
   background-color: #5cb85c;
   color: white;
+  
 }
+
