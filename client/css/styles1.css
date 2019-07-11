@@ -97,8 +97,8 @@ textarea {
 #pokemon-list>li {
     margin: 10px;
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     overflow: hidden;
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
@@ -129,15 +129,15 @@ textarea {
 }
 
 #pokemon-list .pokemon-sprite:hover {
-    background-color: rgba(255, 255, 255, .3);
-    transform: scale(2);
+    /* background-color: rgba(255, 255, 255, .3); */
+    transform: scale(1.3);
 }
 
 .pokemon-sprite {
     background-repeat: no-repeat;
     background-position: center center;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     cursor: pointer;
 }
 

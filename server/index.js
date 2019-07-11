@@ -82,13 +82,16 @@ app.get("/", async function (req, res) {
 var pokemons = {}
 app.get("/pokemonNames", async function (req, res) {
     try {
-        var prefix_image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        var prefix_image = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00"
         var sufix_image = ".png"
         axios.get("https://pokeapi.co/api/v2/pokemon/?limit=" + MAXPOKEMON)
             .then(function (response) {
                 //console.log(response.data.results)
                 pokemons.data = response.data.results
                 for (let i = 0, len = pokemons.data.length; i < len; i++) {
+                    if(i == 9 || i == 99){
+                        prefix_image = prefix_image.slice(0,-1)
+                    }
                     pokemons.data[i].name = formatName(pokemons.data[i].name);
                     pokemons.data[i].front_image = prefix_image + (i + 1) + sufix_image
                     pokemons.data[i].id = i+1
