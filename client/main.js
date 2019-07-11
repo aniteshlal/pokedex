@@ -287,6 +287,8 @@ function update_pokemon_load_more() {
     ENDPOKEMON = ENDPOKEMON + 25 > MAXPOKEMON ? MAXPOKEMON : ENDPOKEMON + 25;
     // console.log("start = " + STARTPOKEMON + ", End = " + ENDPOKEMON);
 }
+
+/*
 // Create a request variable and assign a new XMLHttpRequest object to it.
 var request = new XMLHttpRequest();
 
@@ -332,3 +334,43 @@ request.onload = function() {
 };
 // Send request
 request.send();
+*/var pokemons
+var req = new XMLHttpRequest();
+req.open("GET", "http://localhost:3000/pokemonNames");
+req.onload = function() {
+    pokemons = JSON.parse(req.response).data // data comes in as an array
+    if (req.status >= 200 && req.status < 400) {
+        pokemons.forEach(pokemon => {
+            const container = document.getElementById("pokemon-list");
+            const card = document.createElement("li");
+            // var backgroundColor = findBackgroundColor(pokemon.types);
+            // console.log(pokemon.types[0].type.name);
+            card.setAttribute("class", "pokemon-container");
+            // card.setAttribute("style", "background: " + backgroundColor);
+            const imageButton = document.createElement("button");
+            imageButton.setAttribute("type", "button");
+            imageButton.setAttribute("alt", "pokemon-image");
+            imageButton.setAttribute("class", "pokemon-sprite sprite-" + pokemon.id);
+            imageButton.setAttribute("id", "sprite-" + pokemon.id);
+
+            // imageButton.addEventListener("click", "getPokemonStats("+pokemon.id+")");
+            imageButton.setAttribute("onclick", "getPokemonStats(" + pokemon.id + ")");
+            imageButton.style.backgroundImage =
+                "url(" + pokemon.front_image + ")";
+            const span = document.createElement("span");
+            span.setAttribute("class", "pokemon-name");
+
+            span.textContent = pokemon.name;
+
+            container.appendChild(card);
+            card.appendChild(imageButton);
+            card.appendChild(span);
+            // console.log("Pokemon ID: " + pokemon.id);
+            // console.log("Pokemon name: " + pokemon.name);
+            // console.log("Pokemon image: " + pokemon.sprites.front_default);
+        });
+    } else {
+        console.log("error");
+    }
+}
+req.send()

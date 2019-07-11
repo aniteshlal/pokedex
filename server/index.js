@@ -49,7 +49,7 @@ function makeRequestsFromArray(arr) {
         } else {
             return axios
                 .get("https://pokeapi.co/api/v2/pokemon/" + index)
-                .then(function(response) {
+                .then(function (response) {
                     index++;
                     //   console.log("pokemon id: " + response.data.id);
                     //   console.log("index: " + index + " arr length : " + arr.length);
@@ -65,7 +65,7 @@ function makeRequestsFromArray(arr) {
     return request();
 }
 
-app.get("/", async function(req, res) {
+app.get("/", async function (req, res) {
     try {
         STARTPOKEMON = 1, ENDPOKEMON = 26;
         await makeRequestsFromArray(createArrayRange(STARTPOKEMON, ENDPOKEMON));
@@ -79,7 +79,28 @@ app.get("/", async function(req, res) {
     }
 });
 
-app.get("/loadmore", async function(req, res) {
+var pokemons = {}
+app.get("/pokemonNames", async function (req, res) {
+    try {
+        var prefix_image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        var sufix_image = ".png"
+        axios.get("https://pokeapi.co/api/v2/pokemon/?limit=" + MAXPOKEMON)
+            .then(function (response) {
+                //console.log(response.data.results)
+                pokemons.data = response.data.results
+                for (let i = 0, len = pokemons.data.length; i < len; i++) {
+                    pokemons.data[i].name = formatName(pokemons.data[i].name);
+                    pokemons.data[i].front_image = prefix_image + (i + 1) + sufix_image
+                    pokemons.data[i].id = i+1
+                    // console.log(i)
+                }
+                res.send(pokemons);
+            });
+    } catch (e) {
+        console.log("error");
+    }
+});
+app.get("/loadmore", async function (req, res) {
     try {
         update_pokemon_load_more();
         var a = await getRangeOfPokemon(STARTPOKEMON, ENDPOKEMON);
@@ -101,7 +122,7 @@ function getRangeOfPokemon(start, end) {
         if (data[start - 1] && !dataInCache) {
             start++
             dataInCache = start === end
-                // console.log("1 " + dataInCache + " " + start + " " + typeof(start) + " " + typeof(end) + " " + end)
+            // console.log("1 " + dataInCache + " " + start + " " + typeof(start) + " " + typeof(end) + " " + end)
             return request();
         } else if (dataInCache === true) {
             //console.log("2")
@@ -110,10 +131,10 @@ function getRangeOfPokemon(start, end) {
                 " begin= " + begin + " end=" + end)
             return data.slice(begin, finish)
         } else if (!data[start - 1]) {
-            console.log("3 " + dataInCache + " " + start + " " + typeof(start) + " " + typeof(end) + " " + end)
+            console.log("3 " + dataInCache + " " + start + " " + typeof (start) + " " + typeof (end) + " " + end)
             return axios
                 .get("https://pokeapi.co/api/v2/pokemon/" + start)
-                .then(function(response) {
+                .then(function (response) {
                     start++;
                     console.log("pokemon id " + response.data.id);
                     a.push(response.data);
@@ -136,7 +157,7 @@ function getRangeOfPokemon(start, end) {
     return request();
 }
 
-app.get("/getByIDs", async function(req, res) {
+app.get("/getByIDs", async function (req, res) {
     // ex. /getByIDS?startID=25&endID=50
     //console.log("getbyids")
     try {
@@ -155,7 +176,7 @@ app.get("/getByIDs", async function(req, res) {
     }
 });
 
-app.get("/getPokemon", async function(req, res) {
+app.get("/getPokemon", async function (req, res) {
     try {
         var maxPokemon = 807;
         var urlParts = url.parse(req.url, true);
@@ -188,7 +209,7 @@ app.get("/getPokemon", async function(req, res) {
     }
 });
 
-app.get("/getpokemon1", function(req, res) {
+app.get("/getpokemon1", function (req, res) {
     axios
         .get("https://pokeapi.co/api/v2/pokemon/1")
         .then(response => {
