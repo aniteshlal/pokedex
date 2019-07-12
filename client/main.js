@@ -10,27 +10,27 @@ function closeNav() {
 
 // var data;
 
-function update_types_and_id(pokemonID) {
+function update_types_and_id(pokemon_details) {
     var type_and_id = modal.getElementsByClassName("types-and-id")[0]
     var id_detail = type_and_id.getElementsByClassName("detail-id")[0]
-    id_detail.firstElementChild.innerHTML = "#" + pokemonID
+    id_detail.firstElementChild.innerHTML = "#" + pokemon_details.id
 
     var type_detail = type_and_id.getElementsByClassName("detail-types")[0]
-    var currPokemon = data[pokemonID - 1];
-    var typename = currPokemon.types[0].type.name
-    type_detail.children[0].innerHTML = currPokemon.types[0].type.name
-    var typecolor1 = typeColorMap.find(function(elem) {
+    // var currPokemon = pokemon_details;
+    var typename = pokemon_details.types[0].type.name
+    type_detail.children[0].innerHTML = pokemon_details.types[0].type.name
+    var typecolor1 = typeColorMap.find(function (elem) {
         return typename === elem.name;
     });
     type_detail.children[0].style.backgroundColor = typecolor1.color
-    if (currPokemon.types.length == 1) {
+    if (pokemon_details.types.length == 1) {
         type_detail.children[1].style.display = "none"
         modal.style.background = typecolor1.rgbColor
     } else {
         type_detail.children[1].style.display = ""
-        type_detail.children[1].innerHTML = currPokemon.types[1].type.name
-        typename = currPokemon.types[1].type.name
-        var typecolor2 = typeColorMap.find(function(elem) {
+        type_detail.children[1].innerHTML = pokemon_details.types[1].type.name
+        typename = pokemon_details.types[1].type.name
+        var typecolor2 = typeColorMap.find(function (elem) {
             return typename === elem.name;
         });
         type_detail.children[1].style.backgroundColor = typecolor2.color
@@ -39,13 +39,13 @@ function update_types_and_id(pokemonID) {
 }
 
 
-function update_stats(pokemonID) {
+function update_stats(pokemon_details) {
     var stats_detail = modal.getElementsByClassName("stats-detail")[0];
-    var pokemonData = data[pokemonID - 1];
+    var pokemonData = pokemon_details;
     var pokemonStats = pokemonData.stats;
     var stat_bar_fig, stat_bar_bg
-    var typename = data[pokemonID - 1].types[0].type.name
-    var colortypemap = typeColorMap.find(function(elem) {
+    var typename = pokemon_details.types[0].type.name
+    var colortypemap = typeColorMap.find(function (elem) {
         return typename === elem.name;
     });
     var color = colortypemap.color
@@ -70,48 +70,55 @@ function update_stats(pokemonID) {
     }
 }
 
-function update_detail_image(pokemonID) {
+function update_detail_image(pokemon_details) {
     var modal = document.getElementById('myModal');
     var spirte_detail = modal.getElementsByClassName("pokemon-sprite-detail")[0]
-    spirte_detail.style.backgroundImage = "url(" + data[pokemonID - 1].sprites.front_default + ")";
+    spirte_detail.style.backgroundImage = "url(" + pokemon_details.sprites.front_default + ")";
     spirte_detail.addEventListener('mouseenter', e => {
-        spirte_detail.style.backgroundImage = "url(" + data[pokemonID - 1].sprites.back_default + ")";
+        spirte_detail.style.backgroundImage = "url(" + pokemon_details.sprites.back_default + ")";
     });
     spirte_detail.addEventListener('mouseleave', e => {
-        spirte_detail.style.backgroundImage = "url(" + data[pokemonID - 1].sprites.front_default + ")";
+        spirte_detail.style.backgroundImage = "url(" + pokemon_details.sprites.front_default + ")";
     });
 }
 
 function getPokemonStats(pokemonID) {
-    var modal = document.getElementById('myModal');
+    var requestbyID = new XMLHttpRequest();
+    requestbyID.open("GET", "http://localhost:3000/getByID?ID=" + pokemonID)
+    requestbyID.send()
+    requestbyID.onload = function () {
+        var pokemon_details = JSON.parse(requestbyID.response)
+        console.log(pokemon_details)
+        var modal = document.getElementById('myModal');
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("sprite-" + pokemonID);
+        // Get the button that opens the modal
+        var btn = document.getElementById("sprite-" + pokemonID);
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-    modal.style.display = "block";
-    console.log("clicking pokemon id = " + pokemonID);
-    var modelHeader = document.getElementsByClassName("modal-header")[0];
-    var pokemonName = modelHeader.getElementsByTagName("h2")[0];
-    pokemonName.innerHTML = data[pokemonID - 1].name;
+        modal.style.display = "block";
+        console.log("clicking pokemon id = " + pokemonID);
+        var modelHeader = document.getElementsByClassName("modal-header")[0];
+        var pokemonName = modelHeader.getElementsByTagName("h2")[0];
+        pokemonName.innerHTML = pokemon_details.name;
 
-    update_stats(pokemonID);
-    update_types_and_id(pokemonID)
-    update_detail_image(pokemonID)
+        update_stats(pokemon_details)
+        update_types_and_id(pokemon_details)
+        update_detail_image(pokemon_details)
 
-    var modalheader = modal.getElementsByClassName('modal-header')[0];
-    modalheader.style.backgroundColor =
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        var modalheader = modal.getElementsByClassName('modal-header')[0];
+        modalheader.style.backgroundColor =
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     }
 }
@@ -132,12 +139,12 @@ var span = document.getElementsByClassName("close")[0];
 // }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
     modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
@@ -188,7 +195,7 @@ function findBackgroundColor(types) {
     }
     return backgroundColor;
 }
-
+/*
 function displayPokemon() {
     // Begin accessing JSON data here
     // console.log(request.response);
@@ -228,16 +235,17 @@ function displayPokemon() {
         console.log("error");
     }
 }
+*/
 // get the load-more-button element
 var loadmore = document.getElementById('load-more-button')
 
-loadmore.onclick = function() {
+loadmore.onclick = function () {
     var request = new XMLHttpRequest();
     update_pokemon_load_more();
     request.open("GET", "http://localhost:3000/getByIDs?startID=" + STARTPOKEMON + "&endID=" + ENDPOKEMON);
     console.log("insideloadmoreclick " + request.statusText)
     request.send()
-    request.onload = function() {
+    request.onload = function () {
         // Begin accessing JSON data here
         // console.log(request.response);
         var loadmoredata = JSON.parse(request.response);
@@ -334,10 +342,11 @@ request.onload = function() {
 };
 // Send request
 request.send();
-*/var pokemons
+*/
+var pokemons
 var req = new XMLHttpRequest();
 req.open("GET", "http://localhost:3000/pokemonNames");
-req.onload = function() {
+req.onload = function () {
     pokemons = JSON.parse(req.response).data // data comes in as an array
     if (req.status >= 200 && req.status < 400) {
         pokemons.forEach(pokemon => {

@@ -179,6 +179,25 @@ app.get("/getByIDs", async function (req, res) {
     }
 });
 
+app.get("/getByID", async function (req, res) {
+    try {
+        var urlParts = url.parse(req.url, true);
+        var query = urlParts.query;
+        console.log(query.ID)
+        if (query.ID) {
+            axios.get("https://pokeapi.co/api/v2/pokemon/" + query.ID)
+            .then(function (response) {
+                res.send(response.data);
+            });
+        } else {
+            console.log("Need to provide query/param for pokemon id");
+            res.send("ERROR DID NOT HAVE QUERY ID");
+        }
+    } catch (e) {
+        console.log(e);
+    }
+});
+
 app.get("/getPokemon", async function (req, res) {
     try {
         var maxPokemon = 807;
