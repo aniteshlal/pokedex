@@ -1,11 +1,27 @@
+
+document.getElementsByClassName("hamburger")[0].onclick = toggleNav
+
+function toggleNav(){
+    navSize = document.getElementById("mySidenav").style.width
+    if (navSize === "0px") {
+        return openNav();
+    }
+    return closeNav();
+}
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
+    // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    document.getElementsByClassName("hamburger")
+    document.getElementsByClassName("hamburger")[0].classList.add("active")
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
+    // document.body.style.backgroundColor = "white";
+    document.getElementsByClassName("hamburger")[0].classList.remove("active")
 }
 
 // var data;
@@ -101,7 +117,7 @@ function getPokemonStats(pokemonID) {
         console.log("clicking pokemon id = " + pokemonID);
         var modelHeader = document.getElementsByClassName("modal-header")[0];
         var pokemonName = modelHeader.getElementsByTagName("h2")[0];
-        pokemonName.innerHTML = pokemon_details.name;
+        pokemonName.innerHTML = pokemon_details.name.toUpperCase();
 
         update_stats(pokemon_details)
         update_types_and_id(pokemon_details)
@@ -236,6 +252,8 @@ function displayPokemon() {
     }
 }
 */
+
+/*
 // get the load-more-button element
 var loadmore = document.getElementById('load-more-button')
 
@@ -289,12 +307,12 @@ loadmore.onclick = function () {
 var STARTPOKEMON = 1,
     ENDPOKEMON = 26;
 var MAXPOKEMON = 807;
-
-function update_pokemon_load_more() {
-    STARTPOKEMON = ENDPOKEMON
-    ENDPOKEMON = ENDPOKEMON + 25 > MAXPOKEMON ? MAXPOKEMON : ENDPOKEMON + 25;
-    // console.log("start = " + STARTPOKEMON + ", End = " + ENDPOKEMON);
-}
+*/
+// function update_pokemon_load_more() {
+//     STARTPOKEMON = ENDPOKEMON
+//     ENDPOKEMON = ENDPOKEMON + 25 > MAXPOKEMON ? MAXPOKEMON : ENDPOKEMON + 25;
+//     // console.log("start = " + STARTPOKEMON + ", End = " + ENDPOKEMON);
+// }
 
 /*
 // Create a request variable and assign a new XMLHttpRequest object to it.

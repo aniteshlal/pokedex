@@ -2,6 +2,24 @@ h1 {
     color: blue;
 }
 
+#hellobar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 88px;
+    z-index: 30000;
+    background: #919191;
+    -webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+  }
+  .header-text {
+    text-align: center;
+    padding: 15px 20px;
+    width:100%
+  }
+
 body,
 button,
 html,
@@ -19,12 +37,14 @@ textarea {
 }
 
 .top-border {
-    border: 10px solid red;
-    background-color: rgb(126, 10, 150);
+    /* border: 10px solid red;
+    background-color: rgb(126, 10, 150); */
     font-size: 3em;
     padding-bottom: 0em;
     margin-top: 5px;
     margin-bottom: 5px;
+    display: flex;
+    align-items:center;
 }
 
 .sidenav {
@@ -37,7 +57,8 @@ textarea {
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 0px;
+    padding-top: 100px
+
 }
 
 .sidenav a {
@@ -55,7 +76,7 @@ textarea {
 
 .sidenav .closebtn {
     position: absolute;
-    top: 0;
+    top: 75px;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
@@ -68,10 +89,10 @@ textarea {
 
 @media screen and (max-height: 450px) {
     .sidenav {
-        padding-top: 15px;
+        padding-top: 100px;
     }
     .sidenav a {
-        font-size: 18px;
+        font-size: 20px;
     }
 }
 
@@ -79,15 +100,14 @@ textarea {
     display: inline-block;
     font-size: 1em;
     cursor: pointer;
-    text-align: left;
+    /* text-align: left; */
 }
 
 #pokemon-list-wrapper {
-    /* position: relative; */
+    position: relative;
     text-align: center;
-    width: 1122px;
-    margin-right: auto;
-    margin-left: auto;
+    /* width: 1122px; */
+    margin: 100px auto;
 }
 
 #pokemon-list {
@@ -100,12 +120,11 @@ textarea {
     width: 250px;
     height: 250px;
     overflow: hidden;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
     display: inline-flex;
     list-style-type: none;
     cursor: pointer;
     z-index: 20000;
+    border-radius: 5px;
 }
 
 #pokemon-list>li {
@@ -143,7 +162,7 @@ textarea {
 
 .pokemon-sprite-detail {
     width: 150px;
-    height: 150px;
+    height: 100px;
 }
 
 
@@ -361,7 +380,8 @@ textarea {
     color: white;
 }
 
-#load-more-button {
+/* #load-more-button {
+
     width: 200px;
     color: #fff;
     display: block;
@@ -379,4 +399,38 @@ textarea {
     background-color: #fff;
     border: 1px solid blue;
     text-decoration: none;
-}
+} */
+
+.ham {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .hamRotate.active {
+    transform: rotate(45deg);
+  }
+  .line {
+    fill:none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke:#000;
+    stroke-width:5.5;
+    stroke-linecap:round;
+  }
+
+  .ham1 .top {
+    stroke-dasharray: 40 139;
+  }
+  .ham1 .bottom {
+    stroke-dasharray: 40 180;
+  }
+  .ham1.active .top {
+    stroke-dashoffset: -98px;
+  }
+  .ham1.active .bottom {
+    stroke-dashoffset: -138px;
+  }
