@@ -188,6 +188,14 @@ app.get("/getByID", async function (req, res) {
         if (query.ID) {
             axios.get("https://pokeapi.co/api/v2/pokemon/" + query.ID)
             .then(function (response) {
+                if(response.data.sprites.front_default == null){
+                    response.data.sprites.front_default = 
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+query.ID+".png"
+                }
+                if(response.data.sprites.back_default == null){
+                    response.data.sprites.back_default =
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+query.ID+".png"
+                }
                 res.send(response.data);
             });
         } else {
