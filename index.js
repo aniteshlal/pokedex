@@ -65,19 +65,7 @@ function makeRequestsFromArray(arr) {
   return request();
 }
 
-app.get("/", async function(req, res) {
-  try {
-    (STARTPOKEMON = 1), (ENDPOKEMON = 26);
-    await makeRequestsFromArray(createArrayRange(STARTPOKEMON, ENDPOKEMON));
-    console.log("Inside /, data length: " + data.length);
-    res.send(data);
-    //console.log(data.length)
-    // console.log("start = " + STARTPOKEMON + ", End = " + ENDPOKEMON);
-    // update_pokemon_load_more();
-  } catch (e) {
-    console.log("error");
-  }
-});
+app.get("/", mainPage);
 
 var pokemons = {};
 app.get("/pokemonNames", async function(req, res) {
@@ -276,7 +264,7 @@ app.get("/getpokemon1", function(req, res) {
 });
 
 app.use("/index", mainPage);
-mainPage.use(express.static("client"));
+app.use(express.static("client"));
 mainPage.use((req, res) => res.sendFile(`${__dirname}/client/index.html`));
 // var http = require("https");
 
