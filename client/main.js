@@ -305,160 +305,16 @@ function findBackgroundColor(types) {
   }
   return backgroundColor;
 }
-/*
-function displayPokemon() {
-    // Begin accessing JSON data here
-    // console.log(request.response);
-    var loadmoredata = JSON.parse(request.response);
-    data = data.concat(loadmoredata);
-    if (request.status >= 200 && request.status < 400) {
-        loadmoredata.forEach(pokemon => {
-            const container = document.getElementById("pokemon-list");
-            const card = document.createElement("li");
-            var backgroundColor = findBackgroundColor(pokemon.types);
-            // console.log(pokemon.types[0].type.name);
-            card.setAttribute("class", "pokemon-container");
-            card.setAttribute("style", "background: " + backgroundColor);
-            const imageButton = document.createElement("button");
-            imageButton.setAttribute("type", "button");
-            imageButton.setAttribute("alt", "pokemon-image");
-            imageButton.setAttribute("class", "pokemon-sprite sprite-" + pokemon.id);
-            imageButton.setAttribute("id", "sprite-" + pokemon.id);
 
-            // imageButton.addEventListener("click", "getPokemonStats("+pokemon.id+")");
-            imageButton.setAttribute("onclick", "getPokemonStats(" + pokemon.id + ")");
-            imageButton.style.backgroundImage =
-                "url(" + pokemon.sprites.front_default + ")";
-            const span = document.createElement("span");
-            span.setAttribute("class", "pokemon-name");
-
-            span.textContent = pokemon.name;
-
-            container.appendChild(card);
-            card.appendChild(imageButton);
-            card.appendChild(span);
-            // console.log("Pokemon ID: " + pokemon.id);
-            // console.log("Pokemon name: " + pokemon.name);
-            // console.log("Pokemon image: " + pokemon.sprites.front_default);
-        });
-    } else {
-        console.log("error");
-    }
-}
-*/
-
-/*
-// get the load-more-button element
-var loadmore = document.getElementById('load-more-button')
-
-loadmore.onclick = function () {
-    var request = new XMLHttpRequest();
-    update_pokemon_load_more();
-    request.open("GET", `${BASEURL}/getByIDs?startID=` + STARTPOKEMON + "&endID=" + ENDPOKEMON);
-    console.log("insideloadmoreclick " + request.statusText)
-    request.send()
-    request.onload = function () {
-        // Begin accessing JSON data here
-        // console.log(request.response);
-        var loadmoredata = JSON.parse(request.response);
-        data = data.concat(loadmoredata);
-        if (request.status >= 200 && request.status < 400) {
-            loadmoredata.forEach(pokemon => {
-                const container = document.getElementById("pokemon-list");
-                const card = document.createElement("li");
-                var backgroundColor = findBackgroundColor(pokemon.types);
-                // console.log(pokemon.types[0].type.name);
-                card.setAttribute("class", "pokemon-container");
-                card.setAttribute("style", "background: " + backgroundColor);
-                const imageButton = document.createElement("button");
-                imageButton.setAttribute("type", "button");
-                imageButton.setAttribute("alt", "pokemon-image");
-                imageButton.setAttribute("class", "pokemon-sprite sprite-" + pokemon.id);
-                imageButton.setAttribute("id", "sprite-" + pokemon.id);
-
-                // imageButton.addEventListener("click", "getPokemonStats("+pokemon.id+")");
-                imageButton.setAttribute("onclick", "getPokemonStats(" + pokemon.id + ")");
-                imageButton.style.backgroundImage =
-                    "url(" + pokemon.sprites.front_default + ")";
-                const span = document.createElement("span");
-                span.setAttribute("class", "pokemon-name");
-
-                span.textContent = pokemon.name;
-
-                container.appendChild(card);
-                card.appendChild(imageButton);
-                card.appendChild(span);
-                // console.log("Pokemon ID: " + pokemon.id);
-                // console.log("Pokemon name: " + pokemon.name);
-                // console.log("Pokemon image: " + pokemon.sprites.front_default);
-            });
-        } else {
-            console.log("error");
-        }
-    };
-
-}
-var STARTPOKEMON = 1,
-    ENDPOKEMON = 26;
-var MAXPOKEMON = 807;
-*/
-// function update_pokemon_load_more() {
-//     STARTPOKEMON = ENDPOKEMON
-//     ENDPOKEMON = ENDPOKEMON + 25 > MAXPOKEMON ? MAXPOKEMON : ENDPOKEMON + 25;
-//     // console.log("start = " + STARTPOKEMON + ", End = " + ENDPOKEMON);
-// }
-
-/*
-// Create a request variable and assign a new XMLHttpRequest object to it.
-var request = new XMLHttpRequest();
-
-// Open a new connection, using the GET request on the URL endpoint
-request.open("GET", `${BASEURL}/getByIDs?startID=` + STARTPOKEMON + "&endID=" + ENDPOKEMON, true);
-request.onload = function() {
-    // Begin accessing JSON data here
-    data = JSON.parse(request.response);
-    //console.log(request.response);
-    if (request.status >= 200 && request.status < 400) {
-        data.forEach(pokemon => {
-            const container = document.getElementById("pokemon-list");
-            const card = document.createElement("li");
-            var backgroundColor = findBackgroundColor(pokemon.types);
-            // console.log(pokemon.types[0].type.name);
-            card.setAttribute("class", "pokemon-container");
-            card.setAttribute("style", "background: " + backgroundColor);
-            const imageButton = document.createElement("button");
-            imageButton.setAttribute("type", "button");
-            imageButton.setAttribute("alt", "pokemon-image");
-            imageButton.setAttribute("class", "pokemon-sprite sprite-" + pokemon.id);
-            imageButton.setAttribute("id", "sprite-" + pokemon.id);
-
-            // imageButton.addEventListener("click", "getPokemonStats("+pokemon.id+")");
-            imageButton.setAttribute("onclick", "getPokemonStats(" + pokemon.id + ")");
-            imageButton.style.backgroundImage =
-                "url(" + pokemon.sprites.front_default + ")";
-            const span = document.createElement("span");
-            span.setAttribute("class", "pokemon-name");
-
-            span.textContent = pokemon.name;
-
-            container.appendChild(card);
-            card.appendChild(imageButton);
-            card.appendChild(span);
-            // console.log("Pokemon ID: " + pokemon.id);
-            // console.log("Pokemon name: " + pokemon.name);
-            // console.log("Pokemon image: " + pokemon.sprites.front_default);
-        });
-    } else {
-        console.log("error");
-    }
-};
-// Send request
-request.send();
-*/
 var pokemons;
 var req = new XMLHttpRequest();
 req.open("GET", `${BASEURL}/pokemonNames`);
+req.onprogress = () => {
+  document.getElementById("pokemon-list-wrapper").style.visibility = "hidden";
+};
 req.onload = function() {
+  document.getElementById("load").style.visibility = "hidden";
+  document.getElementById("pokemon-list-wrapper").style.visibility = "visible";
   pokemons = JSON.parse(req.response).data; // data comes in as an array
   if (req.status >= 200 && req.status < 400) {
     pokemons.forEach(pokemon => {
