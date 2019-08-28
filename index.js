@@ -34,8 +34,7 @@ function createArrayRange(start, end) {
  * @param {array} arr array of ids of pokemon
  */
 function formatName(name) {
-  return name.charAt(0).to;
-  UpperCase() + name.substring(1);
+  return name.charAt(0).toUpperCase() + name.substring(1);
 }
 
 var data = [];
