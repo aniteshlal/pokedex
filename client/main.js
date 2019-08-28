@@ -1,5 +1,4 @@
 const BASEURL = window.location.origin;
-console.log(BASEURL);
 document.getElementsByClassName("hamburger")[0].onclick = toggleNav;
 
 function toggleNav() {
@@ -71,7 +70,7 @@ function update_stats(pokemon_details) {
   });
   var color = colortypemap.color;
   var modalheadcolor = colortypemap.modalheadercolor;
-  console.log(modalheadcolor);
+  // console.log(modalheadcolor);
   var modalheader = modal.getElementsByClassName("modal-header")[0];
   modalheader.style.backgroundColor = modalheadcolor;
   var modalfoot = modal.getElementsByClassName("modal-footer")[0];
@@ -116,7 +115,7 @@ function getPokemonStats(pokemonID) {
   requestbyID.send();
   requestbyID.onload = function() {
     var pokemon_details = JSON.parse(requestbyID.response);
-    console.log(pokemon_details);
+    // console.log(pokemon_details);
     var modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
@@ -126,7 +125,7 @@ function getPokemonStats(pokemonID) {
     var span = document.getElementsByClassName("close")[0];
 
     modal.style.display = "block";
-    console.log("clicking pokemon id = " + pokemonID);
+    // console.log("clicking pokemon id = " + pokemonID);
     var modelHeader = document.getElementsByClassName("modal-header")[0];
     var pokemonName = modelHeader.getElementsByTagName("h2")[0];
     pokemonName.innerHTML = pokemon_details.name.toUpperCase();
@@ -288,6 +287,38 @@ var typeColorMap = [
   }
 ];
 
+var showAll = document.getElementById("showAll")
+var gen1 = document.getElementById("generation1")
+var gen2 = document.getElementById("generation2")
+var gen3 = document.getElementById("generation3")
+var gen4 = document.getElementById("generation4")
+var gen5 = document.getElementById("generation5")
+var gen6 = document.getElementById("generation6")
+var gen7 = document.getElementById("generation7")
+
+showAll.onclick = () => showGenerationPokemon(0)
+gen1.onclick = () => showGenerationPokemon(1)
+gen2.onclick = () => showGenerationPokemon(2)
+gen3.onclick = () => showGenerationPokemon(3)
+gen4.onclick = () => showGenerationPokemon(4)
+gen5.onclick = () => showGenerationPokemon(5)
+gen6.onclick = () => showGenerationPokemon(6)
+gen7.onclick = () => showGenerationPokemon(7)
+
+function showGenerationPokemon(genNumber){
+    let allGenPokemon = document.getElementsByClassName("pokemon-container")
+    console.log("pokemon-container gen-"+genNumber)
+    let generationToShow = "pokemon-container gen-"+genNumber
+    for(let i = 0; i < allGenPokemon.length ;i++) {
+        let el = allGenPokemon[i]
+        if(el.classList.value === generationToShow || genNumber === 0){
+            el.style.display = ""
+        }else{
+            el.style.display = "none"
+        }
+    }
+}
+
 function findBackgroundColor(types) {
   if (types.length == 1) {
     var color = typeColorMap.find(obj => {
@@ -332,7 +363,7 @@ req.onload = function() {
       // var backgroundColor = findBackgroundColor(pokemon.types);
       // console.log(pokemon.types[0].type.name);
       var generation = getGeneration(pokemon.id);
-      console.log(generation);
+      // console.log(generation);
       card.setAttribute("class", `pokemon-container ${generation}`);
       // card.setAttribute("style", "background: " + backgroundColor);
       const imageButton = document.createElement("button");
