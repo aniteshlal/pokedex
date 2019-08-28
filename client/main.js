@@ -317,6 +317,8 @@ function showGenerationPokemon(genNumber){
             el.style.display = "none"
         }
     }
+    let filterTitle = genNumber === 0 ? "Showing All" : `Showing Generation ${genNumber}`
+    document.getElementById("filter-name").innerHTML = filterTitle
 }
 
 function findBackgroundColor(types) {
