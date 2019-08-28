@@ -6,8 +6,19 @@ const port = process.env.PORT || 3000;
 const url = require("url");
 app.use(cors());
 const mainPage = express();
-// app.get("/", (req, res) => res.send("Hello World!!!!"));
+const gen1 = require("./routes/gen1");
 
+/*
+  gen 1 = 1 to 151
+  gen 2 = 152 to 251
+  gen 3 = 252 to 386
+  gen 4 = 387 to 493
+  gen 5 = 494 to 649
+  gen 6 = 650 to 721
+  gen 7 = 722 to 807
+*/
+// app.get("/", (req, res) => res.send("Hello World!!!!"));
+app.use("/gen1", gen1);
 function createArrayRange(start, end) {
   var foo = [];
   for (var i = start; i <= end; i++) {
@@ -23,7 +34,8 @@ function createArrayRange(start, end) {
  * @param {array} arr array of ids of pokemon
  */
 function formatName(name) {
-  return name.charAt(0).toUpperCase() + name.substring(1);
+  return name.charAt(0).to;
+  UpperCase() + name.substring(1);
 }
 
 var data = [];

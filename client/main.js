@@ -1,4 +1,5 @@
 const BASEURL = window.location.origin;
+console.log(BASEURL);
 document.getElementsByClassName("hamburger")[0].onclick = toggleNav;
 
 function toggleNav() {
@@ -305,7 +306,15 @@ function findBackgroundColor(types) {
   }
   return backgroundColor;
 }
-
+function getGeneration(id) {
+  if (id <= 151) return "gen-1";
+  if (id <= 251) return "gen-2";
+  if (id <= 386) return "gen-3";
+  if (id <= 493) return "gen-4";
+  if (id <= 649) return "gen-5";
+  if (id <= 721) return "gen-6";
+  return "gen-7";
+}
 var pokemons;
 var req = new XMLHttpRequest();
 req.open("GET", `${BASEURL}/pokemonNames`);
@@ -322,7 +331,9 @@ req.onload = function() {
       const card = document.createElement("li");
       // var backgroundColor = findBackgroundColor(pokemon.types);
       // console.log(pokemon.types[0].type.name);
-      card.setAttribute("class", "pokemon-container");
+      var generation = getGeneration(pokemon.id);
+      console.log(generation);
+      card.setAttribute("class", `pokemon-container ${generation}`);
       // card.setAttribute("style", "background: " + backgroundColor);
       const imageButton = document.createElement("button");
       imageButton.setAttribute("type", "button");
